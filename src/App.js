@@ -320,21 +320,21 @@ const Feature = styled.div`
 //     margin: 1em 0em;
 // `
 
-const Partner = styled.div`
-    width: 250px;
-    height: 100px;
-    background-color: #FFF;
-    margin: 0em 2em;
+// const Partner = styled.div`
+//     width: 250px;
+//     height: 100px;
+//     background-color: #FFF;
+//     margin: 0em 2em;
     
-    ${props => props.theme.breakpoints.down("md")} {
-        background-color: ${props => props.theme.palette.grey4};
-        display: none;
+//     ${props => props.theme.breakpoints.down("md")} {
+//         background-color: ${props => props.theme.palette.grey4};
+//         display: none;
 
-        &:first-of-type {
-            display: block;
-        }
-    }
-`
+//         &:first-of-type {
+//             display: block;
+//         }
+//     }
+// `
 
 function App() {
   const iOSUrl = 'https://www.apple.com/ios/app-store/';
