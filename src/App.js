@@ -204,9 +204,12 @@ const SectionHeader = styled.h2`
 const TopSection = styled.div`
     background-color: ${props => props.theme.palette.primaryBlue};
     color: ${props => props.theme.palette.grey4};
-    height: 100vh;
-    min-height: 950px;
-    max-height: 1200px;
+
+    ${props => props.theme.breakpoints.up("md")} {
+      min-height: 950px;
+      max-height: 1200px;
+      height: 100vh;
+    }
 `
 
 const TopSectionContent = styled.div`
@@ -325,7 +328,7 @@ const Feature = styled.div`
 //     height: 100px;
 //     background-color: #FFF;
 //     margin: 0em 2em;
-    
+
 //     ${props => props.theme.breakpoints.down("md")} {
 //         background-color: ${props => props.theme.palette.grey4};
 //         display: none;
