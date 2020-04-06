@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider as SCThemeProvider } from "styled-components";
 import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
-import { BrowserView, isBrowser, isAndroid, isIOS } from "react-device-detect";
+import { BrowserView, MobileView, isBrowser, isAndroid, isIOS } from "react-device-detect";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -61,6 +61,9 @@ const DownArrowWrapper = styled.a`
     flex-direction: column;
     position: relative;
     bottom: 6em;
+    ${props => props.theme.breakpoints.down("md")} {
+      display: none;
+    }
 `
 
 const DownArrowImage = styled.img`
@@ -79,10 +82,13 @@ const Section = styled.div`
         background: url('./dashed-bg.png') top left repeat-x;
         padding: 4em 0em;
         background-position-x: calc(50% - 6em);
-        
+
         ${props => props.theme.breakpoints.down("md")} {
             font-size: 1.3rem;
             background-image: none;
+            p {
+              text-align: center;
+            }
         }
     }
     
@@ -127,7 +133,12 @@ const Section = styled.div`
         }
 
         ${props => props.theme.breakpoints.down("md")} {
+            font-size: 1.3rem;
             background-color: inherit;
+            p {
+              text-align: center;
+              padding: 0 2.92em;
+            }
         }
     }
 `
@@ -358,7 +369,7 @@ function App() {
                     <Logo src="./flaat-logo.svg" />
                     <p>
                       Let’s work together to flatten the  curve of Covid-19 in Canada.
-                                        </p>
+                    </p>
                     <strong>Coming Soon April 2020 on:</strong>
                     <MobileDownloadButtons>
                       {(isBrowser || isIOS) && (
@@ -391,6 +402,14 @@ function App() {
                         The app uses anonymized location data and works to protect non-infected Canadians by identifying mobile device(s) that may have been in close proximity to an infected person.
                       </p>
                     </BrowserView>
+                    <MobileView>
+                      <SectionHeader>Our Mission</SectionHeader>
+                      <p>
+                        Using machine learning algorithms, Flaat is able to proactively identify high risk Covid-19 locations to help Canadian’s avoid areas of concern through anonymized location data from
+                        those infected. We can identify any mobile device that may have been at the same location and within a certain distance of the infected person, allowing users to be notified if they’ve
+                        had some risk of contact.
+                      </p>
+                    </MobileView>
                   </OurMissionText>
                   <OurMissionImage src="./person-3.png" />
                 </SectionContent>
