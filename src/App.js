@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider as SCThemeProvider } from "styled-components";
 import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
-import { BrowserView, isBrowser, isTablet, isAndroid, isIOS } from "react-device-detect";
+import { isBrowser, isTablet, isAndroid, isIOS } from "react-device-detect";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -129,11 +129,9 @@ const OurMissionText = styled.div`
     margin: 6.5em 10em;
 
     p, h2 {
-      max-width: 500px;
-    }
-
-    p {
       text-align: left;
+      max-width: 500px;
+
       ${props => props.theme.breakpoints.down("md")} {
         text-align: center;
       }
@@ -406,15 +404,12 @@ function App() {
               <Section id="ourMission">
                 <SectionContent>
                   <OurMissionText>
-                    <BrowserView>
-                      <SectionHeader>Our Mission</SectionHeader>
-                      <p>
-                        Flaat has been created to promote the safety of Canadians and to flatten the curve of COVID-19.
-                        Giving Canadians the choice to share location and bluetooth capabilities of their mobile devices, helps stop the spread by identifying areas of COVID-19 concentration and notifying individuals who have potentially been exposed to COVID-19.
-                      </p>
-                      <br></br>
-                      <p>The app uses anonymized location data and works to protect non-infected Canadians by identifying mobile device(s) that may have been in close proximity to an infected person.</p>
-                    </BrowserView>
+                    <SectionHeader>Our Mission</SectionHeader>
+                    <p>
+                      Flaat has been created to promote the safety of Canadians and to flatten the curve of COVID-19.
+                      Giving Canadians the choice to share location and bluetooth capabilities of their mobile devices, helps stop the spread by identifying areas of COVID-19 concentration and notifying individuals who have potentially been exposed to COVID-19.
+                    </p>
+                    <p>The app uses anonymized location data and works to protect non-infected Canadians by identifying mobile device(s) that may have been in close proximity to an infected person.</p>
                   </OurMissionText>
                   <OurMissionImage src="./person-3.svg" />
                 </SectionContent>
