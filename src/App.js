@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider as SCThemeProvider } from "styled-components";
 import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
-import { BrowserView, MobileView, isBrowser, isTablet, isAndroid, isIOS } from "react-device-detect";
+import { BrowserView, isBrowser, isTablet, isAndroid, isIOS } from "react-device-detect";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -133,7 +133,10 @@ const OurMissionText = styled.div`
     }
 
     p {
-      text-align: center;
+      text-align: left;
+      ${props => props.theme.breakpoints.down("md")} {
+        text-align: center;
+      }
     }
 
     p:last-child {
@@ -412,14 +415,6 @@ function App() {
                       <br></br>
                       <p>The app uses anonymized location data and works to protect non-infected Canadians by identifying mobile device(s) that may have been in close proximity to an infected person.</p>
                     </BrowserView>
-                    <MobileView>
-                      <SectionHeader>Our Mission</SectionHeader>
-                      <p>
-                        Using machine learning algorithms, Flaat is able to proactively identify high risk Covid-19 locations to help Canadian’s avoid areas of concern through anonymized location data from
-                        those infected. We can identify any mobile device that may have been at the same location and within a certain distance of the infected person, allowing users to be notified if they’ve
-                        had some risk of contact.
-                      </p>
-                    </MobileView>
                   </OurMissionText>
                   <OurMissionImage src="./person-3.svg" />
                 </SectionContent>
