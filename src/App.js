@@ -174,7 +174,14 @@ const DoYourPartText = styled.div`
     width: 40%;
     max-width: 625px;
     margin: 6.5em 10em;
-    
+
+    h2 {
+      text-align: left;
+      ${props => props.theme.breakpoints.down("md")} {
+        text-align: center;
+      }
+    }
+
     ${props => props.theme.breakpoints.down("md")} {
         font-size: 1.3rem;
         margin: 5em 2em 2em 2em;
