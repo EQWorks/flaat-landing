@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider as SCThemeProvider } from "styled-components";
 import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
-import { BrowserView, MobileView, isBrowser, isAndroid, isIOS } from "react-device-detect";
+import { isBrowser, isTablet, isAndroid, isIOS } from "react-device-detect";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -56,19 +56,6 @@ const SectionContent = styled.div`
     position: relative;
 `
 
-const DownArrowWrapper = styled.a`
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    bottom: 6em;
-    ${props => props.theme.breakpoints.down("md")} {
-      display: none;
-    }
-`
-
-const DownArrowImage = styled.img`
-`
-
 const Section = styled.div`
     font-size: 1.5em;
 
@@ -86,19 +73,13 @@ const Section = styled.div`
         ${props => props.theme.breakpoints.down("md")} {
             font-size: 1.3rem;
             background-image: none;
-            p {
-              text-align: center;
-            }
+            padding: 6em 0em 4em 0em;
         }
     }
-    
+
     &#features {
         background-color: ${props => props.theme.palette.mustard};
         padding: 3em 0em;
-
-        p {
-          padding: 0em 7em;
-        }
 
         ${props => props.theme.breakpoints.down("md")} {
             font-size: 1.3rem;
@@ -145,8 +126,22 @@ const Section = styled.div`
 
 const OurMissionText = styled.div`
     width: 40%;
-    max-width: 500px;
     margin: 6.5em 10em;
+
+    p, h2 {
+      text-align: left;
+      max-width: 500px;
+
+      ${props => props.theme.breakpoints.down("md")} {
+        text-align: center;
+      }
+    }
+
+    p:last-child {
+      ${props => props.theme.breakpoints.up("md")} {
+        max-width: 625px;
+      }
+    }
 
     ${props => props.theme.breakpoints.down("md")} {
         margin: 200px 2em 2em 2em;
@@ -172,14 +167,22 @@ const OurMissionImage = styled.img`
 `
 
 const FeatureIcon = styled.img`
-
+  height: 60px;
+  width: 60px;
 `
 
 const DoYourPartText = styled.div`
     width: 40%;
-    max-width: 700px;
+    max-width: 625px;
     margin: 6.5em 10em;
-    
+
+    h2 {
+      text-align: left;
+      ${props => props.theme.breakpoints.down("md")} {
+        text-align: center;
+      }
+    }
+
     ${props => props.theme.breakpoints.down("md")} {
         font-size: 1.3rem;
         margin: 5em 2em 2em 2em;
@@ -208,15 +211,25 @@ const DoYourPartImage = styled.img`
 
 const SectionHeader = styled.h2`
     font-family: 'Montserrat';
-    font-size: 2.75rem;
+    font-size: 2rem;
     font-weight: 100;
+    text-align: center;
+
+    ${props => props.theme.breakpoints.down("md")} {
+      font-size: 1.8rem;
+    }
 `
 
 const TopSection = styled.div`
     background-color: ${props => props.theme.palette.primaryBlue};
     color: ${props => props.theme.palette.grey4};
 
-    ${props => props.theme.breakpoints.up("md")} {
+    ${props => props.theme.breakpoints.between("md", "lg")} {
+      min-height: 700px;
+      height: 50vh;
+    }
+
+    ${props => props.theme.breakpoints.up("lg")} {
       min-height: 950px;
       max-height: 1200px;
       height: 100vh;
@@ -254,7 +267,7 @@ const MiddleContent = styled.div`
         font-size: 2em;
 
         ${props => props.theme.breakpoints.down("md")} {
-            width: 200px;
+            width: 300px;
             font-size: 1.5em;
             line-height: 1.5em;
         }
@@ -309,6 +322,7 @@ const Person = styled.img`
 const FeaturesContent = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     
     ${props => props.theme.breakpoints.down("md")} {
         flex-direction: column;
@@ -320,11 +334,11 @@ const Feature = styled.div`
     margin: 0em 3em;
 
     p {
-      max-width: 54vh;
+      max-width: 500px;
     }
     
     ${props => props.theme.breakpoints.down("md")} {
-        margin: 1em 1em;
+        margin: 2em 2em;
     }
 `
 
@@ -361,7 +375,7 @@ function App() {
           <GlobalStyle />
           <StyledApp>
             <Content>
-              <TopSection>
+              <TopSection isTablet={isTablet}>
                 <Header />
                 <TopSectionContent>
                   <Person src="./person-1@2x.png"></Person>
@@ -370,7 +384,7 @@ function App() {
                     <p>
                       Let’s work together to flatten the  curve of Covid-19 in Canada.
                     </p>
-                    <strong>Coming Soon April 2020 on:</strong>
+                    <strong>Coming Soon April 2020 on</strong>
                     <MobileDownloadButtons>
                       {(isBrowser || isIOS) && (
                         <MobileDownloadButton href={iOSUrl}>
@@ -387,31 +401,17 @@ function App() {
                   <Person src="./person-2@2x.png"></Person>
                 </TopSectionContent>
               </TopSection>
-              <DownArrowWrapper href="#ourMission">
-                <DownArrowImage src="./down-arrow.svg"></DownArrowImage>
-              </DownArrowWrapper>
               <Section id="ourMission">
                 <SectionContent>
                   <OurMissionText>
-                    <BrowserView>
-                      <SectionHeader>Our Mission</SectionHeader>
-                      <p>
-                        Flaat has been created to promote the safety of Canadians and to flatten the curve of COVD-19.
-                        By leveraging mobile phone capabilities – opt-in location sharing and bluetooth sharing – Flaat is able to proactively identify high risk Covid-19 locations in Canada.
-                        By doing so, the FLAAT app will help Canadians avoid areas of concern and also notify Canadians if they have possibly been exposed to COVID-19. <br></br><br></br>
-                        The app uses anonymized location data and works to protect non-infected Canadians by identifying mobile device(s) that may have been in close proximity to an infected person.
-                      </p>
-                    </BrowserView>
-                    <MobileView>
-                      <SectionHeader>Our Mission</SectionHeader>
-                      <p>
-                        Using machine learning algorithms, Flaat is able to proactively identify high risk Covid-19 locations to help Canadian’s avoid areas of concern through anonymized location data from
-                        those infected. We can identify any mobile device that may have been at the same location and within a certain distance of the infected person, allowing users to be notified if they’ve
-                        had some risk of contact.
-                      </p>
-                    </MobileView>
+                    <SectionHeader>Our Mission</SectionHeader>
+                    <p>
+                      Flaat has been created to promote the safety of Canadians and to flatten the curve of COVID-19.
+                      Giving Canadians the choice to share location and bluetooth capabilities of their mobile devices, helps stop the spread by identifying areas of COVID-19 concentration and notifying individuals who have potentially been exposed to COVID-19.
+                    </p>
+                    <p>The app uses anonymized location data and works to protect non-infected Canadians by identifying mobile device(s) that may have been in close proximity to an infected person.</p>
                   </OurMissionText>
-                  <OurMissionImage src="./person-3.png" />
+                  <OurMissionImage src="./person-3.svg" />
                 </SectionContent>
               </Section>
               <Section id="features">
@@ -419,9 +419,9 @@ function App() {
                   <FeaturesContent>
                     <Feature>
                       <FeatureIcon src="./icon-bars.png" />
-                      <SectionHeader>Smart Data</SectionHeader>
+                      <SectionHeader>Smart, Private Data</SectionHeader>
                       <p>
-                        FLAAT will collect and process a lot of data which can be used for intelligent predictive modelling and to flatten the curve.
+                        Flaat collects and processes data which can be used for intelligent predictive modelling and to flatten the curve.
                         The data collected is anonymized and encrypted; if data is required for reporting purposes, users are asked for permission.
                       </p>
                     </Feature>
@@ -429,7 +429,8 @@ function App() {
                       <FeatureIcon src="./icon-bell.png" />
                       <SectionHeader>Risk Notifications</SectionHeader>
                       <p>
-                        FLAAT can proactively notify users - via opt-on push notifications - who have been in high risk areas. These notifications may help users flatten the curve.
+                        Flaat proactively notifies users – via opt-in push notifications – who have been in high risk areas.
+                        These notifications give users information they can use to avoid high risk locations or to proactively seek testing.
                       </p>
                     </Feature>
                   </FeaturesContent>
