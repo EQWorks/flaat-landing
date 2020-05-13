@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider as SCThemeProvider } from "styled-components";
 import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
-import { isBrowser, isTablet, isAndroid, isIOS } from "react-device-detect";
+import { isTablet } from "react-device-detect";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -291,23 +291,23 @@ const Logo = styled.img`
     }
 `
 
-const MobileDownloadButtons = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin-top: 1em;
-`
+// const MobileDownloadButtons = styled.div`
+//     display: flex;
+//     flex-direction: row;
+//     margin-top: 1em;
+// `
 
-const MobileDownloadButton = styled.a`
-    margin: 0em 2em;
-`
+// const MobileDownloadButton = styled.a`
+//     margin: 0em 2em;
+// `
 
-const MobileDownloadImage = styled.img`
-    height: 3.5vw;
+// const MobileDownloadImage = styled.img`
+//     height: 3.5vw;
     
-    ${props => props.theme.breakpoints.down("md")} {
-        height: 64px;
-    }
-`
+//     ${props => props.theme.breakpoints.down("md")} {
+//         height: 64px;
+//     }
+// `
 
 const Person = styled.img`
     height: 620px;
@@ -342,6 +342,21 @@ const Feature = styled.div`
     }
 `
 
+const StyledExternalButton = styled.a`
+    padding: 1em;
+    background-color: ${props => props.theme.palette.grey4};
+    text-decoration: none;
+    color: ${props => props.theme.palette.primaryBlue};
+    font-weight: 600;
+    &:hover {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      background-color: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.3);
+    }
+    
+`
+
 // const Partners = styled.div`
 //     display: flex;
 //     justify-content: center;
@@ -365,8 +380,10 @@ const Feature = styled.div`
 // `
 
 function App() {
-  const iOSUrl = 'https://www.apple.com/ios/app-store/';
-  const androidUrl = 'https://play.google.com/';
+  // const iOSUrl = 'https://www.apple.com/ios/app-store/';
+  // const androidUrl = 'https://play.google.com/';
+  const flaatTracingURl = 'https://whitepaper.flaat.io/';
+  const flaatSDKUrl = 'https://github.com/EQWorks/flaat-sdk-ios/';
 
   return (
     <StylesProvider injectFirst>
@@ -384,8 +401,15 @@ function App() {
                     <p>
                       Let’s work together to flatten the  curve of Covid-19 in Canada.
                     </p>
-                    <strong>Coming Soon April 2020 on</strong>
-                    <MobileDownloadButtons>
+                    <strong>Open Source SDK</strong>
+                    <StyledExternalButton href={flaatSDKUrl} target={'_new'}>
+                      View on Github
+                    </StyledExternalButton>
+                    <strong>FLAAT Tracing Whitepaper</strong>
+                    <StyledExternalButton href={flaatTracingURl} target={'_new'}>
+                      View on site
+                    </StyledExternalButton>
+                    {/* <MobileDownloadButtons>
                       {(isBrowser || isIOS) && (
                         <MobileDownloadButton href={iOSUrl}>
                           <MobileDownloadImage src="./ios-download@2x.png" />
@@ -396,7 +420,7 @@ function App() {
                           <MobileDownloadImage src="./android-download@2x.png" />
                         </MobileDownloadButton>
                       )}
-                    </MobileDownloadButtons>
+                    </MobileDownloadButtons> */}
                   </MiddleContent>
                   <Person src="./person-2@2x.png"></Person>
                 </TopSectionContent>
